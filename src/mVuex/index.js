@@ -28,29 +28,29 @@ class Store {
         this.actions = {}
         this.modules = {}
         // 初始化getters
-        this.defineGetters(options)
+        this.registerGetters(options)
 
         // 初始化 Mutations
-        this.defineMutations(options)
+        this.registerMutations(options)
 
         // 初始化actions 
-        this.defineActions(options)
+        this.registerActions(options)
 
         // 初始化 modules
-        this.defineModules(options)
+        this.registerModules(options)
        
     }
-    defineGetters(options) {
+    registerGetters(options) {
         const getters = options.getters || {}
         Object.keys(getters).forEach(getter => {
-            Object.defineProperty(this.getters, getter, {
+            Object.registerProperty(this.getters, getter, {
                 get() {
                     return getters[getter](options.state)
                 }
             })
         })
     }
-    defineMutations(options) {
+    registerMutations(options) {
         const mutations = options.mutations || {}
         Object.keys(mutations).forEach(mutation => {
                 this.mutations[mutation] = (params) => {
@@ -58,7 +58,7 @@ class Store {
                 }
         })
     }
-    defineActions(options) {
+    registerActions(options) {
         const actions = options.actions || {}
         Object.keys(actions).forEach(action => {
             this.actions[action] = (params) => {
@@ -68,7 +68,7 @@ class Store {
 
     }
 
-    defineModules(options) {
+    registerModules(options) {
         const modules = options.modules || {}
         Object.keys(modules).forEach(module => {
             this.state[module] = new Store(modules[module])
