@@ -19,9 +19,20 @@ export default {
       return this.$store.state.storeName
     },
     myName() {
-      console.log(this.$store)
       return this.$store.getters.myName
     }
+  },
+
+  mounted() {
+    console.log('moduleA', this.$store.state.moduleA)
+    window.setTimeout(() => {
+      this.$store.commit('updateStoreName', 'mutations')
+    }, 1000)
+    this.$store.dispatch('updateNameAction', 'action')
+  },
+
+  methods: {
+ 
   }
 }
 </script>
