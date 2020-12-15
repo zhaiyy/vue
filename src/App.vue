@@ -24,7 +24,7 @@ export default {
   },
 
   mounted() {
-    console.log('moduleA', this.$store.state.moduleA)
+    console.log('moduleA', this.$store.state.moduleA.state)
     window.setTimeout(() => {
       this.$store.commit('updateStoreName', 'mutations')
     }, 1000)
